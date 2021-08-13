@@ -24,6 +24,15 @@ export default function ImageGallery({ picturesName }) {
     picturesName && handleFetchPictures(1)
   }, [picturesName])
 
+  
+  useEffect(() => {
+    status === 'resolved' &&
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    })
+  }, [status])
+  
   const handleFetchPictures = (page) => {
     setStatus('pending')
     fetchPictures({ picturesName: picturesName, KEYS, PER_PAGE, page })
@@ -44,15 +53,7 @@ export default function ImageGallery({ picturesName }) {
         setStatus('rejected')
       })
   }
-
-  useEffect(() => {
-    status === 'resolved' &&
-      window.scrollTo({
-        top: document.documentElement.scrollHeight,
-        behavior: 'smooth',
-      })
-  }, [status])
-
+  
   const handlLoadMore = () => {
     handleFetchPictures(currentPage + 1)
   }

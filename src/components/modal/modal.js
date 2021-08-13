@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom'
 
 const modalRoot = document.querySelector('#modal-root')
 
-export default function Modal({ onCloseModal }) {
+export default function Modal({ onCloseModal, src, alt }) {
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown)
     return () => {
@@ -28,7 +28,7 @@ export default function Modal({ onCloseModal }) {
   return createPortal(
     <div onClick={handleBackdropClick} className="Overlay">
       <div className="Modal">
-        <img src={this.props.src} alt={this.props.alt} />
+        <img src={src} alt={alt} />
       </div>
     </div>,
     modalRoot
@@ -36,5 +36,5 @@ export default function Modal({ onCloseModal }) {
 }
 
 Modal.propTypes = {
-  onCloseModal: PropTypes.func.isRequired,
+  onCloseModal: PropTypes.func,
 }
